@@ -1,11 +1,3 @@
-
-
-export interface LanguageItem {
-  code: string
-  name: string
-}
-
-
 export interface I18nOptions {
   locale: string
   messages: Record<string, any>
@@ -16,7 +8,6 @@ export interface I18nOptions {
   changeDocLanguage?: boolean
   callback?: (locale: string) => void
 }
-
 
 export interface I18n {
   locale: string

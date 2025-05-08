@@ -1,4 +1,4 @@
-import type { I18nOptions, I18n } from './types'
+import type { I18n, I18nOptions } from './types'
 
 // 工具函数：通过点语法获取对象属性
 function getByPath(obj: any, path: string): any {
@@ -29,6 +29,7 @@ export function createI18n(options: I18nOptions): I18n {
 
   if (_cache) {
     _locale = _cache.getItem(_cacheKey) || _locale
+    _cache.setItem(_cacheKey, _locale)
   }
 
   if (_changeDocLanguage) {
@@ -76,7 +77,8 @@ export const create = createI18n
 
 export function $t(key: string, ...args: any[]) {
   const i18n = window.__VANILLA_I18N__
-  if (!i18n) return key
+  if (!i18n)
+    return key
 
   let value = getByPath(i18n.getLocaleMessage(i18n.getLocale()), key)
   if (typeof value !== 'string') {
@@ -88,4 +90,3 @@ export function $t(key: string, ...args: any[]) {
   }
   return key
 }
-
